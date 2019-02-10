@@ -1,56 +1,68 @@
-﻿using LoanModel;
+﻿using LoanCommon;
+using LoanModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LoanDAL
 {
+    /// <summary>
+    /// Load Data Access for all data store's
+    /// </summary>
     public class LoanDataAccess : ILoanDataAccess
     {
-
+        /// <summary>
+        /// Get Load Details
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public List<Loan> GetLoanListDetails(string userID)
         {
-            return  new List<Loan>()
+            try
             {
-                new Loan() {   UserName = "Ramesh",
-                           LoanName = "Loan Name",
-                           LoanID = 1,
-                           Balance = 12,
-                           Interest = 21,
-                           EarlyPaymentFee =23,
-                           PayOutCarryOver = 333
-                },
-                  new Loan() {   UserName = "Savarimuthu",
-                           LoanName = "Loan Name 1",
-                           LoanID = 2,
-                           Balance = 122,
-                           Interest = 21,
-                           EarlyPaymentFee =1,
-                           PayOutCarryOver = 223
-                },
-                   new Loan() {   UserName = "Ramesh 2",
-                           LoanName = "Loan Name",
-                           LoanID = 1,
-                           Balance = 12,
-                           Interest = 21,
-                           EarlyPaymentFee =23,
-                           PayOutCarryOver = 1
-                },
-                  new Loan() {   UserName = "Savarimuthu 22",
-                           LoanName = "Loan Name 1",
-                           LoanID = 2,
-                           Balance = 122,
-                           Interest = 21,
-                           EarlyPaymentFee =1,
-                           PayOutCarryOver = 2
-                }
-            };
+                var conString = ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
 
-           
+                var dataService = ServiceFactory.GetService("SQL"); // TODO - move this configuration to web.Config
+
+                // Construct Params
+                var lstParam = new List<SqlParameter>() {
+                                new SqlParameter() {
+                                    ParameterName = Constant.IN_PARAMS_USER_ID,
+                                    Value = userID,
+                                    Direction =  ParameterDirection.Input
+                                 }
+                                };
+
+                //Get data from Datastore
+                var dsLoanList = dataService.GetData(Constant.SP_GetLoadDetails, lstParam, conString);
+
+                // Convert DS to .NET Object
+                List<Loan> lstLoan = new List<Loan>();
+                lstLoan = (from DataRow dr in dsLoanList.Tables[0].Rows
+                           select new Loan()
+                           {
+                               UserName = Convert.ToString(dr[Constant.COLUMN_USER_NAME] ?? ""),
+                               LoanName = Convert.ToString(dr[Constant.COLUMN_LOAN_NAME] ?? ""),
+                               LoanID = Convert.ToInt32(dr[Constant.COLUMN_LOAN_ID] ?? 0),
+                               Balance = Convert.ToDecimal(dr[Constant.COLUMN_BALANCE] ?? 0),
+                               Interest = Convert.ToDecimal(dr[Constant.COLUMN_INTEREST] ?? 0),
+                               EarlyPaymentFee = Convert.ToDecimal(dr[Constant.COLUMN_EARLY_FEE] ?? 0),
+                               PayOutCarryOver = Convert.ToDecimal(dr[Constant.COLUMN_PAY_CARRY_OVER] ?? 0),
+                           }).ToList();
+
+                return lstLoan;
+            }
+            catch (Exception ex)
+            {
+                // TOD - handle exception
+                throw;
+            }
+   
         }
-
-
-    }
+   }
 }

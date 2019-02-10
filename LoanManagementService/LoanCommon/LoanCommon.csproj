@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CCC4E41-3C3B-49BD-8B4A-6D00DBEA9515}</ProjectGuid>
+    <ProjectGuid>{7B0D69BD-1BD9-41C8-A5EF-68A03B89D07A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoanDAL</RootNamespace>
-    <AssemblyName>LoanDAL</AssemblyName>
+    <RootNamespace>LoanCommon</RootNamespace>
+    <AssemblyName>LoanCommon</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,20 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILoanDataAccess.cs" />
-    <Compile Include="LoanDataAccess.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="IDataService.cs" />
+    <Compile Include="InMemoryDataService.cs" />
+    <Compile Include="SQLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LoanCommon\LoanCommon.csproj">
-      <Project>{7B0D69BD-1BD9-41C8-A5EF-68A03B89D07A}</Project>
-      <Name>LoanCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LoanModel\LoanModel.csproj">
-      <Project>{f800f45f-e78c-48fb-bcfc-4ec844d165a8}</Project>
-      <Name>LoanModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

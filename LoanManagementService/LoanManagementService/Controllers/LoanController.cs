@@ -50,7 +50,7 @@ namespace LoanManagementService.Controllers
                 };
                 throw new HttpResponseException(message);
             }
-            return Ok();
+            return Ok(lstLoanDetails);
         }
     }
 }
