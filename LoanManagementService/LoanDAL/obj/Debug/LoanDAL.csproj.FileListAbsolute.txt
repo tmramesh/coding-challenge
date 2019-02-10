@@ -1,0 +1,10 @@
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\bin\Debug\LoanDAL.dll
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\bin\Debug\LoanDAL.pdb
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\bin\Debug\LoanModel.dll
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\bin\Debug\LoanModel.pdb
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\bin\Debug\LoanModel.dll.config
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\obj\Debug\LoanDAL.csprojAssemblyReference.cache
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\obj\Debug\LoanDAL.csproj.CoreCompileInputs.cache
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\obj\Debug\LoanDAL.csproj.CopyComplete
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\obj\Debug\LoanDAL.dll
+C:\Users\tmram\LoanManagement\coding-challenge\LoanManagementService\LoanDAL\obj\Debug\LoanDAL.pdb

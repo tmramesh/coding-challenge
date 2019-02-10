@@ -15,7 +15,7 @@ namespace LoanManagementService.Controllers
 
         public LoanController()
         {
-            _loanDAL = new LoanDataAccess();
+           // _loanDAL = new LoanDataAccess();
         }
 
         public LoanController(ILoanDataAccess loanDAL)
@@ -26,16 +26,31 @@ namespace LoanManagementService.Controllers
 
 
         /// <summary>
-        /// 
+        ///  get the loan details for the given UserID
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         [Route("{userid}/loans")]
         [HttpGet]
         public IHttpActionResult GetLoans(string userId)
-        { 
-            // TODO - Impelemt IOC
-            return Ok(_loanDAL.GetLoanListDetails(userId));
+        {
+            List<Loan> lstLoanDetails = new List<Loan>();
+            try
+            {
+                lstLoanDetails = _loanDAL.GetLoanListDetails(userId);
+
+                // return only 3 records to caller
+                lstLoanDetails = lstLoanDetails?.Count > 3 ? lstLoanDetails.Take<Loan>(3).ToList() : lstLoanDetails;
+            }
+            catch (Exception ex)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent( ex.ToString())
+                };
+                throw new HttpResponseException(message);
+            }
+            return Ok();
         }
     }
 }
