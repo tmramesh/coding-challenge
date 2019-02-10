@@ -1,0 +1,56 @@
+<!-- status for all selected personal loan-->
+<div class="row" *ngIf="this.getdata.selectedTopUpamount.length==3">
+  <div class="w-70"></div>
+  <p class="status">
+    With 3 or more current personal loan,new loan is not applicable
+  </p>
+</div>
+
+<p>You have {{loanlist.length}} personal loans</p>
+
+<ng-container *ngFor="let data of loanlist;let index=index">
+<table id="listloan">
+  <thead>
+    <tr>
+      <th colspan="3">
+       {{index+1}} {{data.LoanName }} # {{data.LoanID}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="borderbrmtr">
+      <td>
+        Balance
+      </td>
+      <td>
+        {{data.Balance |currency}}
+      </td>
+      <td class="cursor">
+          <label class="container" >
+              <input type="checkbox" class="singleselect" (change)="selectTopupCheckbox()"  value={{data.PayOutCarryOver}}>
+              <span class="checkmark"></span>
+              TopUp
+            </label>
+      </td>
+    </tr>
+    <ng-container *ngIf="showOnCheck(data.PayOutCarryOver)==true">
+    <tr >
+        <td>Balance include interest of</td>
+        <td>{{data.Interest |currency}}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Early repayment fee</td>
+        <td>{{data.EarlyPaymentFee |currency}}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Payout / carryover amount</td>
+        <td class="bold">{{data.PayOutCarryOver |currency}}</td>
+        <td>This amount will be carried over</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+<br>
+</ng-container>

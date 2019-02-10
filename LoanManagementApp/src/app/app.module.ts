@@ -10,12 +10,14 @@ import { CommonModule } from '@angular/common';
 import { WebserviceService } from './webservice.service';
 import { HomeComponent } from './home/home.component';
 import { LoanTopUpComponent } from './loan-top-up/loan-top-up.component';
+import { PersonalLoanListComponent } from './personal-loan-list/personal-loan-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoanTopUpComponent,
+    PersonalLoanListComponent,
   ],
   imports: [
     RouterModule,
