@@ -1,0 +1,24 @@
+
+<!-- loan top-up-table -->
+
+<table id="topup-table">
+  <thead>
+    <th class="la-header" colspan="4">Personal Loan Topup or Apply</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>To apply for a TopUp of the existing loan amount,please select the loan below,make a note of a carry-over amount before processing</td>
+      <td>Carry-over or carryout amount</td>
+      <td  class="tdrightBorder">{{ getTotalAmount() | currency}}</td>
+      <td *ngIf="getTotalAmount()>0"><button class= "activebtn" id="incLoab">Apply for increasing loan amount</button></td>
+      <td *ngIf="getTotalAmount()==0 || getTotalAmount()<=0"><button class= "disabledbtn" id="incLoabdis" disabled>Apply for increasing loan amount</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="tdrightBorder"></td>
+      <td *ngIf="getnewloanActive()==true"><button  class= "activebtn"id="newPersonalloan" >Apply for new personal loan</button></td>
+      <td *ngIf="getnewloanActive()==false"><button   class= "disabledbtn" id="incLoabdis" disabled>Apply for new personal loan</button></td>
+    </tr>
+  </tbody> 
+</table>

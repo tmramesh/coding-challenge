@@ -1,0 +1,75 @@
+body{
+    background: #f3f2f2;
+}
+.la-header{
+    font-weight: bold;
+}
+
+    /* table style*/
+#topup-table{
+    border-collapse: collapse;
+    margin: 5%;
+    margin-bottom: 1%;
+}
+table#topup-table td,table#topup-table th,table#topup-table tr{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 6px;
+    font-size: 11px
+}
+
+table#topup-table th{
+text-align:left;
+}
+table#topup-table td{
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+.tdrightBorder{
+    border-right: 1px solid #ccc;
+    }
+
+    /* button style*/
+.activebtn {
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 6px 30px;
+    border-radius: 20px;
+    box-shadow: none;
+    border: none;
+    background: #e8e7e7;
+    cursor: pointer;
+    width: 95%;
+}
+.disabledbtn {
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 6px 30px;
+    border-radius: 20px;
+    box-shadow: none;
+    border: none;
+    background: #e8e7e7;
+    width: 95%;
+}
+.bbNone{
+    border-bottom: none;
+}
+.activebtn:hover {
+   background: #444;
+   color:#fff;
+   box-shadow: 0px 1px 4px #000;
+}
+
+button:disabled, button[disabled] {
+    color: #969494;
+    cursor: not-allowed;
+}
+
+    /*media tag max-width 768px */
+    @media only screen and (max-width: 768px) {
+        #topup-table{
+            margin: 1% 0%;
+        }
+      }
+  
