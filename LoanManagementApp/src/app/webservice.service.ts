@@ -29,7 +29,7 @@ export class WebserviceService {
         this.totalTopupAmount = value;
     }
 
-    userid = 101;
+    userid = 1;
 
     getLoanList() {
         const headers = new Headers();
