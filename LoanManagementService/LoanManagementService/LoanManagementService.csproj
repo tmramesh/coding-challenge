@@ -155,6 +155,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LoanCommon\LoanCommon.csproj">
+      <Project>{7B0D69BD-1BD9-41C8-A5EF-68A03B89D07A}</Project>
+      <Name>LoanCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LoanDAL\LoanDAL.csproj">
       <Project>{9ccc4e41-3c3b-49bd-8b4a-6d00dbea9515}</Project>
       <Name>LoanDAL</Name>

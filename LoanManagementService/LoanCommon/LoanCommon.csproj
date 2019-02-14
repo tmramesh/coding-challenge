@@ -42,10 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant.cs" />
+    <Compile Include="Helper\ILogger.cs" />
+    <Compile Include="Helper\LoanManagementLogger.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="InMemoryDataService.cs" />
+    <Compile Include="Logger\FlatFileLogger.cs" />
+    <Compile Include="Logger\ILog.cs" />
+    <Compile Include="Logger\LogWritterFactory.cs" />
     <Compile Include="SQLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

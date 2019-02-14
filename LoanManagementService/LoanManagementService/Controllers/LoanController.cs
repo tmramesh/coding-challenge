@@ -1,8 +1,10 @@
-﻿using LoanDAL;
+﻿using LoanCommon.Helper;
+using LoanDAL;
 using LoanManagementService.Filters;
 using LoanModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,7 +19,6 @@ namespace LoanManagementService.Controllers
 
         public LoanController()
         {
-           // _loanDAL = new LoanDataAccess();
         }
 
         public LoanController(ILoanDataAccess loanDAL)
@@ -34,6 +35,10 @@ namespace LoanManagementService.Controllers
         [HttpGet]
         public IHttpActionResult GetLoans(string userId)
         {
+            Stopwatch sw = Stopwatch.StartNew();
+             
+            ILogger logger = UnityConfig.Resolve<ILogger>();
+            logger.Log("Application started");
             List<Loan> lstLoanDetails = new List<Loan>();
             try
             {
@@ -49,8 +54,11 @@ namespace LoanManagementService.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.ToString());
                 return BadRequest(ex.ToString());
             }
+
+            logger.Log($"Application process time { sw.Elapsed.TotalMilliseconds } " );
             return Ok(lstLoanDetails);
         }
     }
