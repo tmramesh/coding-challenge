@@ -23,8 +23,6 @@ namespace LoanManagementService.Controllers
             _loanDAL = loanDAL;
         }
 
-
-
         /// <summary>
         ///  get the loan details for the given UserID
         /// </summary>
@@ -39,16 +37,17 @@ namespace LoanManagementService.Controllers
             {
                 lstLoanDetails = _loanDAL.GetLoanListDetails(userId);
 
+                if (lstLoanDetails == null || lstLoanDetails.Count == 0)
+                {
+                    return NotFound(); // Not Found is returned, If repository don't have requested details. 
+                }
+
                 // return only 3 records to caller
                 lstLoanDetails = lstLoanDetails?.Count > 3 ? lstLoanDetails.Take<Loan>(3).ToList() : lstLoanDetails;
             }
             catch (Exception ex)
             {
-                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent( ex.ToString())
-                };
-                throw new HttpResponseException(message);
+                return BadRequest(ex.ToString());
             }
             return Ok(lstLoanDetails);
         }
