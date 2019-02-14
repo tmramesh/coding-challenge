@@ -1,4 +1,5 @@
 ﻿using LoanDAL;
+using LoanManagementService.Filters;
 using LoanModel;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Http;
 
 namespace LoanManagementService.Controllers
 {
+    [RequireHttps]
     public class LoanController : ApiController
     {
         private ILoanDataAccess _loanDAL { get; set; }
