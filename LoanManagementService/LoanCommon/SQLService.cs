@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -27,8 +28,7 @@ namespace LoanCommon
             {
                 if (string.IsNullOrEmpty(connectionString))
                 {
-                    // TODO - If Connection Empty take from webConfig till that throw error
-                    throw new ApplicationException();
+                    connectionString = ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
                 }
                 using (SqlConnection sqlConn = new SqlConnection(connectionString))
                 {
@@ -48,7 +48,7 @@ namespace LoanCommon
             }
             catch (Exception ex)
             {
-                // TODO Log the exception and throw
+                // throw here, let calling fucntion take care of logging 
                 throw;
             }
           

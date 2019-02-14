@@ -13,6 +13,7 @@ using System.Web.Http;
 namespace LoanManagementService.Controllers
 {
     [RequireHttps]
+    [LoanActionFilter]
     public class LoanController : ApiController
     {
         private ILoanDataAccess _loanDAL { get; set; }
