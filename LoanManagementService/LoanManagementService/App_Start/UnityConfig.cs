@@ -2,6 +2,7 @@ using LoanCommon.Helper;
 using LoanDAL;
 using System.Web.Http;
 using Unity;
+using Unity.Injection;
 using Unity.Lifetime;
 using Unity.WebApi;
 
@@ -13,17 +14,18 @@ namespace LoanManagementService
 
         public static void RegisterComponents()
         {
- 
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container.RegisterType<ILoanDataAccess, LoanDataAccess>(new ContainerControlledLifetimeManager());
-
             container.RegisterType<ILogger, LoanManagementLogger>(new ContainerControlledLifetimeManager());
 
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+            // Inject ILogger in Constructor for logging exception in Loan Data access 
+            container.RegisterType<ILoanDataAccess, LoanDataAccess>(new InjectionConstructor(container.Resolve<ILogger>()));
+
+             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
 
         /// <summary>

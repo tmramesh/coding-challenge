@@ -1,4 +1,5 @@
 ﻿using LoanCommon;
+using LoanCommon.Helper;
 using LoanModel;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,18 @@ namespace LoanDAL
     /// </summary>
     public class LoanDataAccess : ILoanDataAccess
     {
+        ILogger logger;
+
+        // don't allow for default - user should create with logger instance
+        protected LoanDataAccess()
+        {
+
+        }
+
+        public LoanDataAccess(ILogger logger)
+        {
+            this.logger = logger;
+        }
         /// <summary>
         /// Get Load Details
         /// </summary>
@@ -25,6 +38,8 @@ namespace LoanDAL
         {
             try
             {
+                logger.Log($" GetLoanListDetails(UserID: { userID } ");
+
                 var conString = ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
 
                 var dataService = ServiceFactory.GetService("SQL"); // TODO - move this configuration to web.Config
@@ -59,7 +74,7 @@ namespace LoanDAL
             }
             catch (Exception ex)
             {
-                // TOD - handle exception
+                logger.LogError($"Exception occured in GetLoanListDetails(UserID: { userID } ) :  Exception Details: {ex.ToString() }");
                 throw;
             }
    

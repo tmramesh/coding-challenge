@@ -14,6 +14,7 @@ namespace LoanManagementService.Controllers
 {
     [RequireHttps]
     [LoanActionFilter]
+    [LoanExceptionFilter]
     public class LoanController : ApiController
     {
         private ILoanDataAccess _loanDAL { get; set; }
@@ -38,20 +39,21 @@ namespace LoanManagementService.Controllers
         {
             Stopwatch sw = Stopwatch.StartNew();
              
-            ILogger logger = UnityConfig.Resolve<ILogger>();
+            var logger = UnityConfig.Resolve<ILogger>();
+            var lstLoanDetails = new List<Loan>();
+
             logger.Log("Application started");
-            List<Loan> lstLoanDetails = new List<Loan>();
             try
             {
                 lstLoanDetails = _loanDAL.GetLoanListDetails(userId);
 
-                if (lstLoanDetails == null || lstLoanDetails.Count == 0)
+                if (lstLoanDetails == null || lstLoanDetails?.Count == 0)
                 {
-                    return NotFound(); // Not Found is returned, If repository don't have requested details. 
+                    return BadRequest($"Requested UserID :  { userId } is not valid, Please verify your request! "); // Not Found is returned, If repository don't have requested details. 
                 }
 
                 // return only 3 records to caller
-                lstLoanDetails = lstLoanDetails?.Count > 3 ? lstLoanDetails.Take<Loan>(3).ToList() : lstLoanDetails;
+                lstLoanDetails = lstLoanDetails?.Count > 3 ? lstLoanDetails.Take(3).ToList() : lstLoanDetails;
             }
             catch (Exception ex)
             {

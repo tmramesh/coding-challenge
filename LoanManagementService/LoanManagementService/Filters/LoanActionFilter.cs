@@ -15,7 +15,7 @@ namespace LoanManagementService.Filters
     /// </summary>
     public class LoanActionFilter : ActionFilterAttribute
     {
-        public ILogger logger;
+        private ILogger logger;
         public LoanActionFilter()
         {
             logger = UnityConfig.Resolve<LoanManagementLogger>();
